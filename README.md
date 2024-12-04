@@ -115,3 +115,7 @@ J'ai créé un fichier de test "tests/data/test_presto.py" avec différents cas 
 Faites la fonction "parse_presto_labels" qui passe les tests.
 
 Cette fonction doit m'être envoyée avant le 5 décembre 16:00.
+
+## Partie 2: NER model
+
+Entraîner un Named-Entity Recognition model qui reconnaît, dans du texte en anglais, les mots à labelliser "message" ou "person"
