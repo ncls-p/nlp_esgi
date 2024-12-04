@@ -83,9 +83,35 @@ def predict(texts_split_into_words: list[list[str]]) -> list[list[int]]:
         word_labels = predict_is_name(text_split_into_words, model, tokenizer)
 	labels.append(word_labels)
 
-
     return labels
 ```
 - Expérimenter pour produire le meilleur modèle à identifier les noms de personne sur les noms de videos France Inter.<br/>
 Trouver [sur ce lien](https://drive.google.com/file/d/1ZEuK3JYIgXhG90rKUyq2rLAZW4VexD5J/view?usp=drive_link) un dataset avec les noms de video, et le label pour chaque token. <br/>
 (Remarque: le modèle peut être entraîné sur MultiNERD, puis le dataset France Inter).
+
+# NLP TD 4:
+
+Dans ce TD, nous allons coder un assistant virtuel, capable de transformer:
+
+"Ask the python teacher when is the next class?"
+
+en un json:
+
+```
+{
+   "job": "send_message",
+   "receiver": "the python teacher",
+   "content": "when is the next class?",
+}
+```
+
+
+Pour cela, nous allons utiliser [le PRESTO dataset](https://github.com/google-research-datasets/presto). <br/>
+Le bot fonctionnera sur des phrases en anglais (car le dataset contient plus de contenu en anglais).
+
+## Partie 1: Parser le PRESTO dataset
+
+J'ai créé un fichier de test "tests/data/test_presto.py" avec différents cas de "inputs / targets" extraits du dataset PRESTO. <br/>
+Faites la fonction "parse_presto_labels" qui passe les tests.
+
+Cette fonction doit m'être envoyée avant le 5 décembre 16:00.
