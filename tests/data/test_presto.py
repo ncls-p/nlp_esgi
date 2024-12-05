@@ -1,4 +1,4 @@
-from data.presto import parse_presto_labels
+from src.data import parse_presto_labels
 
 
 def test_parse_presto_labels():
@@ -33,7 +33,19 @@ def test_parse_presto_labels():
 
     res = parse_presto_labels(sentence, target)
 
-    assert res["labels"] == [0, 0, "note_feature", 0, "content", "content", "content", "content", "content", "content", 0]
+    assert res["labels"] == [
+        0,
+        0,
+        "note_feature",
+        0,
+        "content",
+        "content",
+        "content",
+        "content",
+        "content",
+        "content",
+        0,
+    ]
 
     sentence = "Tweet um tweet 'hello ;)'"
     target = "Post_message ( medium « tweet » message « hello ;) » )"
@@ -43,13 +55,15 @@ def test_parse_presto_labels():
     assert res["labels"] == [0, 0, "medium", 0, "message", "message", 0]
 
     sentence = "Do not be late!"
-    target = "'Create_note ( content « Do not be late! » note_assignee InferFromContext )"
+    target = (
+        "'Create_note ( content « Do not be late! » note_assignee InferFromContext )"
+    )
 
     res = parse_presto_labels(sentence, target)
 
     assert res["labels"] == ["content", "content", "content", "content", "content"]
 
-    
+
 def test_parse_presto_labels__nested_labels():
     # 2-levels nest
     sentence = "Get me the message with the content are you going to yoga class today?."
@@ -57,7 +71,24 @@ def test_parse_presto_labels__nested_labels():
 
     res = parse_presto_labels(sentence, target)
 
-    assert res["labels"] == [0, 0, 0, "message__medium", 0, 0, 0, "message__content", "message__content", "message__content", "message__content", "message__content", "message__content", "message__content", "message__content", 0]
+    assert res["labels"] == [
+        0,
+        0,
+        0,
+        "message__medium",
+        0,
+        0,
+        0,
+        "message__content",
+        "message__content",
+        "message__content",
+        "message__content",
+        "message__content",
+        "message__content",
+        "message__content",
+        "message__content",
+        0,
+    ]
 
     # 4-levels nest
     sentence = "Read me the first 2 messages from 課長."
@@ -65,4 +96,14 @@ def test_parse_presto_labels__nested_labels():
 
     res = parse_presto_labels(sentence, target)
 
-    assert res["labels"] == ["modality", 0, 0, 0, "message__quantity__Number", "message__medium", 0, "message__sender__person", 0]
+    assert res["labels"] == [
+        "modality",
+        0,
+        0,
+        0,
+        "message__quantity__Number",
+        "message__medium",
+        0,
+        "message__sender__person",
+        0,
+    ]
